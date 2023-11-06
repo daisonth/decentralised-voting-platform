@@ -2,7 +2,7 @@
  
 This is a platform for conducting transparent, secure, and tamper-proof elections using blockchain smart contracts. 
 
-## why we need a decentralized voting platform?
+## why we need a decentralised voting platform?
 - **Transparency:** Blockchain technology ensures that all transactions and records are transparent and immutable, making it difficult for anyone to alter or manipulate the voting results. 
 - **Security:** The decentralized nature of blockchain and strong encryption mechanisms make it highly secure and resistant to hacking or fraud.
 - **Elimination of intermediaries:** Blockchain allows for direct peer-to-peer voting, eliminating the need for intermediaries, like election authorities or third-party organizations.
