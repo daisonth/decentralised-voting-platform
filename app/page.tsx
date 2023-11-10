@@ -4,15 +4,19 @@ import { MouseEventHandler, useCallback } from "react"
 import { useWalletModal } from "@solana/wallet-adapter-react-ui"
 import { useWallet } from "@solana/wallet-adapter-react"
 import { useRouter } from "next/navigation";
+import { useAnchorWallet } from '@solana/wallet-adapter-react';
+// import Initialise from "./components/AnchorStuff";
 
 export default function Home() {
+
   const router = useRouter();
   const modalState = useWalletModal()
-  const { publicKey, wallet, connect } = useWallet()
+  const { publicKey, connect } = useWallet()
+  const wallet = useAnchorWallet();
 
   if (publicKey) {
     console.log(publicKey.toString());
-    router.push(`/${publicKey.toString()}`)
+    router.push(`/initialise`)
   }
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback(
@@ -47,7 +51,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div >
     </>
   )
+
 }
