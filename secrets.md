@@ -1,0 +1,2 @@
+devnet : CkYxHzac22xoYRMm6tgoebgkBmhhV2W7g9SwkkPsTkkH
+localnet : 2kFhxSYB7cvVCmvJ7cM91MGkHLMpLcJtov5AKkrczZ4X
