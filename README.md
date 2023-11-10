@@ -11,4 +11,6 @@ This is a platform for conducting transparent, secure, and tamper-proof election
 - **Audibility:** Every vote is recorded on the blockchain, making it possible to audit and verify the results, ensuring the accuracy of the election.
 - many more resons...
 
+### live url: https://decentralised-voting-platform.vercel.app/ 
 
+### live Program on Solana devnet : https://solscan.io/account/CkYxHzac22xoYRMm6tgoebgkBmhhV2W7g9SwkkPsTkkH?cluster=devnet 
