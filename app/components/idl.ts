@@ -161,7 +161,7 @@ export type decentralisedElection = {
   ],
   "accounts": [
     {
-      "name": "UserAccountPda",
+      "name": "userAccountPda",
       "type": {
         "kind": "struct",
         "fields": [
@@ -177,7 +177,7 @@ export type decentralisedElection = {
       }
     },
     {
-      "name": "ElectionPda",
+      "name": "electionPda",
       "type": {
         "kind": "struct",
         "fields": [
@@ -213,7 +213,7 @@ export type decentralisedElection = {
       }
     },
     {
-      "name": "VotePda",
+      "name": "votePda",
       "type": {
         "kind": "struct",
         "fields": [
