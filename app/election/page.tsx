@@ -1,52 +1,59 @@
 'use client'
 
 import { useAnchorWallet, AnchorWallet } from '@solana/wallet-adapter-react';
-import Link from 'next/link';
-import { Initialise, CreateElection } from "../components/AnchorStuff";
-// import { useRouter } from 'next/navigation';
-// import { useState } from 'react';
+import { getAllUserElections, getElectionCount } from "../components/AnchorStuff";
+import NewElection from '../components/NewElection';
+import { useEffect, useState } from 'react';
+import ElectionItem from '../components/ElectionItem';
 
 export default function Home() {
   const wallet = useAnchorWallet();
-  let eletion_count = 0;
+  const [show, setShow] = useState(false);
+  const [electionCount, setElectionCount] = useState(0);
+  const [elections, setElections] = useState([]);
 
-  const fetchElectionCount = async () => {
-    await Initialise(wallet as AnchorWallet).then(
-      data => {
-        console.log("from home: Election = ", data);
-        eletion_count = data;
-      }
-    )
-  }
-  fetchElectionCount();
+  useEffect(() => {
+    const fetchElectionCount = async () => {
+      await getElectionCount(wallet as AnchorWallet).then(
+        data => {
+          setElectionCount(data);
+        }
+      )
+    }
+    fetchElectionCount();
+  }, [])
 
-  const CreateNewElection = async () => {
-    await CreateElection(wallet as AnchorWallet, eletion_count).then(
-      data => {
-        console.log("from home: Election = ", data);
-        // eletion_count = data;
-
-        // router.replace("/dashboard");
-      }
-    )
-  }
+  useEffect(() => {
+    const fetchAllUserElection = async () => {
+      await getAllUserElections(wallet as AnchorWallet).then((data: any) => {
+        setElections(data);
+      });
+      console.log("elections :", elections);
+    }
+    if (electionCount > 0) {
+      console.log("election count :", electionCount);
+      fetchAllUserElection();
+    }
+  }, [electionCount]);
 
 
   return (
     <>
-      <div className='h-[100px] px-[100px] flex items-center justify-between'>
-        <h2 className='text-black px-[30px] font-bold text-2xl'>Number of Elections Created : {eletion_count}</h2>
-        <Link href="/vote">
-          <button onClick={CreateNewElection} className="mx-[30px] h-[50px] px-[20px] rounded-md bg-green-600 font-bold">
-            New Election
-          </button>
-        </Link>
+      <div className='h-[100px] lg:px-[100px] flex items-center justify-between'>
+        <h2 className='text-black px-[30px] font-bold text-[18px] lg:text-2xl'>Number of <br className="lg:hidden" /> Elections Created : {electionCount}</h2>
+        <button onClick={() => setShow(!show)} className="mx-[30px] h-[50px] px-[20px] rounded-md bg-green-600 font-bold">
+          {!show ? "New Election" : "Cancel"}
+        </button>
       </div>
-      <div className="mx-auto bg-white max-w-2xl py-32 sm:py-48 lg:py-56">
-        <div className="text-center">
-        </div>
+      {show ?
+        <NewElection setShow={setShow} electionCount={electionCount} setElectionCount={setElectionCount} />
+        : ""
+      }
+      <div className='w-full flex flex-col text-black text-[22px] gap-[20px] px-[100px] py-[50px]'>
+        {elections.map((election, idx) => {
+          return <ElectionItem election={election} key={idx} />
+        })}
       </div>
     </>
   )
 }
-
